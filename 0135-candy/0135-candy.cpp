@@ -9,17 +9,15 @@ public:
                 candies[i] = candies[i - 1] + 1;
             }
         }
-
+        int totalCandies = candies[n-1];
         for (int i = n - 2; i >= 0; --i) {
             if (ratings[i] > ratings[i + 1]) {
                 candies[i] = std::max(candies[i], candies[i + 1] + 1);
             }
+            totalCandies+=candies[i];
         }
 
-        int totalCandies = 0;
-        for (int candy : candies) {
-            totalCandies += candy;
-        }
+        
 
         return totalCandies;
     }

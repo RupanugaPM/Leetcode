@@ -1,28 +1,29 @@
-bool cmp(string &s1,string &s2)
-{
-    return s1.size() < s2.size();
-}
 class Solution {
 public:
     int longestStrChain(vector<string>& words) {
-        sort(words.begin(),words.end(),cmp);
-        unordered_map<string,int>mp;
-        int ans=0;
-        for(int i=0;i<words.size();i++){
-            mp[words[i]]=1;
-            for(int j=0;j<words[i].size();j++){
-                string s;
-                for(int k=0;k<words[i].size();k++){
-                    if(k!=j){
-                        s+=words[i][k];
-                    }
-                }
-                if(mp.find(s)!=mp.end()){
-                    mp[words[i]]=max(mp[s]+1,mp[words[i]]);
+        int n = words.size();
+        if (n == 1) return 1;
+        sort(words.begin(), words.end(), [&](string& x, string& y) {
+            return x.size() < y.size(); 
+        });
+        vector<unordered_map<string, int>> mp(17);
+        for (auto& w : words)
+            mp[w.size()][w] = 1;
+
+        int ans = 0;
+
+        for (auto& w : words) {
+            int sz = w.size();
+            if (sz == 1) continue;
+            for (int i = 0; i < sz; i++) {
+                string w2 = w.substr(0, i) + w.substr(i+1); 
+                if (mp[sz-1].count(w2) != 0) {
+                    mp[sz][w] = max(mp[sz][w], mp[sz-1][w2] + 1);
                 }
             }
-            ans=max(ans,mp[words[i]]);
+            ans = max(ans, mp[sz][w]);
         }
+
         return ans;
     }
 };

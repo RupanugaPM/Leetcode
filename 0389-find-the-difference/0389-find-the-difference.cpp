@@ -1,17 +1,9 @@
 class Solution {
 public:
-    char findTheDifference(string s, string t) {
-        int t1=0;
-        sort(s.begin(),s.end());
-        sort(t.begin(),t.end());
-        while(t1<s.size()){
-            if(s[t1]==t[t1]){
-                t1++;
-            }
-            else{
-                break;
-            }
-        }
-        return t[t1];
+    char findTheDifference(string s, string t) 
+    {
+      for(int i=0;i<s.size();i++)
+		t[i+1]+=t[i]-s[i]; //Passing the diff: (t[i]-s[i]) to t[i+1]
+      return t[t.size()-1]; //The diff will be carried over to the last element eventually
     }
 };

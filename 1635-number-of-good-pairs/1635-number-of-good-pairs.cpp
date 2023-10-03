@@ -1,13 +1,13 @@
 class Solution {
 public:
     int numIdenticalPairs(vector<int>& nums) {
-        map<int,int>mp;
+        vector<int>v(101,0);
         for(int i=0;i<nums.size();i++){
-            mp[nums[i]]++;
+            v[nums[i]]++;
         }
         int ans=0;
-        for(auto el: mp){
-            ans+=el.second*(el.second-1)/2;
+        for(int i=0;i<101;i++){
+            ans+=v[i]*(v[i]-1)/2;
         }
         return ans;
     }

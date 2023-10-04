@@ -1,11 +1,10 @@
 using namespace std;
+vector<int>v(1000005,-1);
 class MyHashMap {
-private:
-    vector<int>v;
 public:
     MyHashMap() {
         for(int i=0;i<1000005;i++){
-            v.push_back(-1);
+            v[i]=-1;
         }
     }
     
